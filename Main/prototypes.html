@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Jader Vulcano - Prototypes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Prototypes</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="contact.html">Over mij</a></i>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Prototypes</h2>
+							<p>Mechanics coding showcase</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<center><h2>Uitleg</h2></center>
+
+								<p>
+									Dit zijn een boel prototypes voor algemene mechanics in games.
+								</p>
+
+								<hr />
+
+								<section>
+									<center><h3>Singleton</h3></center>
+									<p>
+										Voorbeeld van wanneer ik gebruik maak van het singleton pattern. Dit komt uit mijn huidige eigen project. Dit script zit op een gameobject en deze wordt nooit vernietigd. Zo kan ik altijd bij bepaalde waardes.<br/>
+										<a target="_blank" href="https://github.com/JeeJay23/Prototypes/blob/1cc5dc2d0c5f717e4765a6842aaec007e3f2b8c1/GameManager.cs">Link naar de Github.</a>
+
+										<div class="box alt"><div class="2u"><span class="image fit"><img src="images/Prototypes/gamemanagersnippet.JPG" alt="" /></span></div></div>
+
+										<pre><code>
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class GameManager : MonoBehaviour {
+
+    public static GameManager instance;
+    public BoardManager boardScript;
+    public bool playersTurn = true;
+
+    private List<Enemy> enemies = new List<Enemy>();
+    private int level = 4;
+
+    void Awake()
+    {
+        if (GameManager.instance == null)
+        {
+            GameManager.instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        DontDestroyOnLoad(this);
+
+        boardScript = this.GetComponent<BoardManager>();
+        InitGame();
+    }
+
+    public void GameOver()
+    {
+        enabled = false;
+    }
+
+    public void AddEnemyToList(Enemy enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    void InitGame()
+    {
+        boardScript.SetupScene(level);
+    }
+}
+										</code>
+										</pre>
+									</p>
+							</section>
+
+							<hr />
+							<center><h3>Object-Oriented Programming</h3></center>
+							<p>
+								Ik ben een card game aan het maken een daarvoor maak ik veel gebruik van OOP. Het idee is dat elke kaart zijn standaardfuncties heeft en dan specifiekere functies gebaseerd op wat de kaart doet. De opstelling van classes ziet er dan zo uit: base class Card -> DamagingCard -> Fireball. Hierbij kan DamagingCard ook bijvoorbeeld HealingCard zijn.
+								<br/><br/>
+
+								<a target="_blank" href="https://github.com/JeeJay23/Prototypes/blob/11f0e0a4d67d120068c57ddf516f5dd85601049c/CardCollection.cs">CardCollection namespace</a>, hierin staat alle functionaliteit voor de kaarten.
+
+								<a target="_blank" href="https://github.com/JeeJay23/Prototypes/blob/b308ddf15a8b507f76c407578729ea1b9c21572a/Deck.cs">Deck script</a> en het 
+								<a target="_blank" href="https://github.com/JeeJay23/Prototypes/blob/270f1db410f183326f32d42c2b0b58d8aef90815/PlayerHand.cs">script voor de hand van de speler</a>. De kaarten zelf kunnen nog niks, maar ik kan wel al meerdere kaarten maken en deze toevoegen aan mijn hand.
+
+								<div class="box alt"><div class="2u"><span class="image fit"><img src="images/Prototypes/playerhand.JPG" alt="" /></span></div></div>
+							</p>
+
+
+							<hr />
+							</div>
+						</section>
+
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/jadervulcano" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/jader.vulcano" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<!--<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li-->
+						</ul>
+						<ul class="copyright">
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

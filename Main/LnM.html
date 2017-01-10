@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Jader Vulcano - Latchet & Morty</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Jader Vulcano / Latchet & Morty</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="contact.html">Over mij</a></i>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Latchet & Morty</h2>
+							<p>Een tool voor kinderen met aandachtsproblemen</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<center><h2>Spelbeschrijving</h2></center>
+
+								<p>
+									Latchet & Morty is een game ontworpen om kinderen met concentratieproblemen te helpen door ze te trainen. De speler (het kind) loopt door een 3d-omgeving waarin hij meerdere opdrachten die te maken hebben met een bepaald vak moet voltooien.  In het level zullen er meerdere afleidingen zijn die de speler moet weerstaan. Aan het einde van het level krijgt de speler een aantal punten gebaseerd op hoe snel de speler erover heeft gedaan. Het doel is om de speler hem af te leren om zich te laten afleiden.
+									<br/ ><br />
+									Dit project was gemaakt met een team van zes personen, vijf daarvan zijn artists en een gamedeveloper. Het project was gemaakt in vier weken. Ik heb meegewerkt aan het concept, de scenes gemaakt, alle scripts geschreven en alle 3d modellen geïmporteerd. Ik was ook de scrum-master. De artists hebben alle 3d modellen gemaakt en de artstyle besloten. 
+									Dit project was gemaakt in Unity.
+
+
+								</p>
+
+								<hr />
+								<center><h2>Screenshots</h2></center>
+								<section>
+									<div class="box alt">
+										<div class="row uniform 50%">
+											<div class="12u"><span class="image fit"><img src="images/LatchetandMorty/header.png" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/LatchetandMorty/scr1.png" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/LatchetandMorty/scr2.png" alt="" /></span></div>
+											<div class="4u"><span class="image fit"><img src="images/LatchetandMorty/scr3.png" alt="" /></span></div>
+										</div>
+									</div>
+								</section>
+
+								<hr />
+								<center><h2>Code</h2></center>
+								<p>Dit zijn een paar snippets van interessante stukken code.</p>
+								<pre><code>
+	public void AddBoxToSelectiondub(int val)
+    {
+        bool alreadyInList = false;
+
+        for (int i = 0; i < b.assignment.boxesInput.Count; i++)
+        {
+            if (b.assignment.boxesInput[i] == val)
+            {
+                alreadyInList = true;
+            }
+        }
+
+        if (!alreadyInList)
+        {
+            Debug.Log("value added");
+            b.assignment.AddBoxToSelection(val);
+        }
+        else
+        {
+            Debug.Log("value removed");
+            b.assignment.RemoveBoxFromSelection(val);
+        }
+
+        if (b.assignment.boxesInput.Count == b.requiredBoxes)
+        {
+            b.uiManager.contButton.SetActive(true);
+        }
+
+        b.uiManager.DrawBoxes();
+    }
+								</code></pre>
+								<pre><code>
+	if (b.gamestate == GameState.Gameplay)
+        {
+            if (Physics.Raycast(rayFwd, out hit, 2))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "Q1":
+                        useText.enabled = true;
+                        useText.text = "E) Beantwoordt de vraag";
+                        if (Input.GetButtonDown("Use"))
+                        {
+                            AskQuestion(0);
+                        }
+                        break;
+
+                    case "Q2":
+                        useText.enabled = true;
+                        useText.text = "E) Beantwoordt de vraag";
+                        if (Input.GetButtonDown("Use"))
+                        {
+                            AskQuestion(1);
+                        }
+                        break;
+
+                    case "Q3":
+                        useText.enabled = true;
+                        pickups.SetActive(true);
+                        if (boxesInInv == b.requiredBoxes)
+                        {
+                            useText.text = "E) Beantwoordt de vraag";
+
+                            if (Input.GetButtonDown("Use"))
+                            {
+                                AskQuestion(2);
+                            }
+                        }
+                        else
+                        {
+                            useText.text = "Je hebt nog " + (b.requiredBoxes - boxesInInv) + " dozen nodig!";
+                        }
+                        break;
+
+                    case "Box":
+                        useText.enabled = true;
+                        useText.text = "E) Pak doos op";
+                        if (Input.GetButtonDown("Use"))
+                        {
+                            boxesInInv++;
+                            hit.collider.gameObject.SetActive(false);
+                        }
+                        break;
+
+                    case null:
+                        useText.enabled = false;
+                        break;
+                }
+            }
+            else
+            {
+                useText.enabled = false;
+            }
+        }
+								</code></pre>
+							</div>
+						</section>
+
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/jadervulcano" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/jader.vulcano" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<!--<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li-->
+						</ul>
+						<ul class="copyright">
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
